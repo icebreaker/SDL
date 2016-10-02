@@ -82,6 +82,7 @@ Cocoa_CreateDevice(int devindex)
 
     device->CreateWindow = Cocoa_CreateWindow;
     device->CreateWindowFrom = Cocoa_CreateWindowFrom;
+    device->SetWindowParent = Cocoa_SetWindowParent;
     device->SetWindowTitle = Cocoa_SetWindowTitle;
     device->SetWindowIcon = Cocoa_SetWindowIcon;
     device->SetWindowPosition = Cocoa_SetWindowPosition;

@@ -1512,6 +1512,19 @@ SDL_CreateWindowFrom(const void *data)
 }
 
 int
+SDL_SetWindowParent(SDL_Window * window, const void *data)
+{
+    CHECK_WINDOW_MAGIC(window, -1);
+
+    if (!_this->SetWindowParent) {
+        SDL_Unsupported();
+        return -1;
+    }
+
+    return _this->SetWindowParent(_this, window, data);
+}
+
+int
 SDL_RecreateWindow(SDL_Window * window, Uint32 flags)
 {
     SDL_bool loaded_opengl = SDL_FALSE;

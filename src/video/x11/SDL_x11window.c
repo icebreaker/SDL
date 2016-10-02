@@ -663,6 +663,21 @@ X11_CreateWindowFrom(_THIS, SDL_Window * window, const void *data)
     return 0;
 }
 
+int
+X11_SetWindowParent(_THIS, SDL_Window * window, const void *data)
+{
+    SDL_WindowData *wdata = (SDL_WindowData *) window->driverdata;
+    Display *display = wdata->videodata->display;
+
+    Window parent = (Window) data;
+
+    if (X11_XReparentWindow(display, wdata->xwindow, parent, 0, 0) < 1) {
+        return -1;
+    }
+
+    return 0;
+}
+
 char *
 X11_GetWindowTitle(_THIS, Window xwindow)
 {

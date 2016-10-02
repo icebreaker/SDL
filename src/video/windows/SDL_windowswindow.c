@@ -389,6 +389,28 @@ WIN_CreateWindowFrom(_THIS, SDL_Window * window, const void *data)
     return 0;
 }
 
+int
+WIN_SetWindowParent(_THIS, SDL_Window * window, const void *data)
+{
+    HWND hwnd = ((SDL_WindowData *) window->driverdata)->hwnd;
+    DWORD style = GetWindowLong(hwnd, GWL_STYLE);
+    HWND parent = (HWND) data;
+
+    if ((style & WS_CHILDWINDOW) && parent == NULL) {
+        style &= ~WS_CHILDWINDOW;
+        SetWindowLong(hwnd, GWL_STYLE, style);
+    } else if (!(style & WS_CHILDWINDOW)) {
+        style |= WS_CHILDWINDOW;
+        SetWindowLong(hwnd, GWL_STYLE, style);
+    }
+
+    if (SetParent(hwnd, parent) == NULL) {
+        return -1;
+    }
+
+    return 0;
+}
+
 void
 WIN_SetWindowTitle(_THIS, SDL_Window * window)
 {

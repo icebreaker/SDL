@@ -1303,6 +1303,25 @@ Cocoa_CreateWindowFrom(_THIS, SDL_Window * window, const void *data)
     return SetupWindowData(_this, window, nswindow, SDL_FALSE);
 }}
 
+int
+Cocoa_SetWindowParent(_THIS, SDL_Window * window, const void *data)
+{ @autoreleasepool
+{
+    NSWindow *nswindow = ((SDL_WindowData *) window->driverdata)->nswindow;
+    NSWindow *nsparent = (NSWindow *) data;
+
+    if (nsparent == NULL) {
+        nsparent = [nswindow parent];
+        if (nsparent) {
+            [nsparent removeChildWindow: nswindow];
+        }
+    } else {
+        [nsparent addChildWindow:nswindow orderingMode:NSWindowAbove];
+    }
+
+    return 0;
+}}
+
 void
 Cocoa_SetWindowTitle(_THIS, SDL_Window * window)
 { @autoreleasepool

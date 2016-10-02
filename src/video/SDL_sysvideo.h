@@ -202,6 +202,7 @@ struct SDL_VideoDevice
      */
     int (*CreateWindow) (_THIS, SDL_Window * window);
     int (*CreateWindowFrom) (_THIS, SDL_Window * window, const void *data);
+    int (*SetWindowParent) (_THIS, SDL_Window * window, const void *data);
     void (*SetWindowTitle) (_THIS, SDL_Window * window);
     void (*SetWindowIcon) (_THIS, SDL_Window * window, SDL_Surface * icon);
     void (*SetWindowPosition) (_THIS, SDL_Window * window);

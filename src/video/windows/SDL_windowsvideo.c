@@ -133,6 +133,7 @@ WIN_CreateDevice(int devindex)
 #undef CreateWindow
     device->CreateWindow = WIN_CreateWindow;
     device->CreateWindowFrom = WIN_CreateWindowFrom;
+    device->SetWindowParent = WIN_SetWindowParent;
     device->SetWindowTitle = WIN_SetWindowTitle;
     device->SetWindowIcon = WIN_SetWindowIcon;
     device->SetWindowPosition = WIN_SetWindowPosition;

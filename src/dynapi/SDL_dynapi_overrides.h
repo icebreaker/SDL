@@ -607,3 +607,4 @@
 #define SDL_RenderGetIntegerScale SDL_RenderGetIntegerScale_REAL
 #define SDL_DequeueAudio SDL_DequeueAudio_REAL
 #define SDL_SetWindowResizable SDL_SetWindowResizable_REAL
+#define SDL_SetWindowParent SDL_SetWindowParent_REAL

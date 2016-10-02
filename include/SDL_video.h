@@ -472,8 +472,20 @@ extern DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title,
  *  \return The created window, or NULL if window creation failed.
  *
  *  \sa SDL_DestroyWindow()
+ *  \sa SDL_SetWindowParent()
  */
 extern DECLSPEC SDL_Window * SDLCALL SDL_CreateWindowFrom(const void *data);
+
+/**
+ *  \brief Set the native parent window of an SDL window.
+ *
+ *  \param data A pointer to driver-dependent window data
+ *
+ *  \return 0 on success, or -1 if the operation failed or is not supported.
+ *
+ *  \sa SDL_CreateWindowFrom()
+ */
+extern DECLSPEC int SDLCALL SDL_SetWindowParent(SDL_Window * window, const void *data);
 
 /**
  *  \brief Get the numeric ID of a window, for logging purposes.

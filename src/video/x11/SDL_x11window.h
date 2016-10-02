@@ -78,6 +78,7 @@ extern Uint32 X11_GetNetWMState(_THIS, Window xwindow);
 
 extern int X11_CreateWindow(_THIS, SDL_Window * window);
 extern int X11_CreateWindowFrom(_THIS, SDL_Window * window, const void *data);
+extern int X11_SetWindowParent(_THIS, SDL_Window * window, const void *data);
 extern char *X11_GetWindowTitle(_THIS, Window xwindow);
 extern void X11_SetWindowTitle(_THIS, SDL_Window * window);
 extern void X11_SetWindowIcon(_THIS, SDL_Window * window, SDL_Surface * icon);
