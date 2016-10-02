@@ -164,6 +164,7 @@ WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR szCmdLine, int sw)
     char **argv;
     int argc;
     char *cmdline;
+    int retval;
 
     /* Grab the command line */
     TCHAR *text = GetCommandLine();
@@ -186,14 +187,14 @@ WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR szCmdLine, int sw)
     ParseCommandLine(cmdline, argv);
 
     /* Run the main program */
-    main_utf8(argc, argv);
+    retval = main_utf8(argc, argv);
 
     SDL_stack_free(argv);
 
     SDL_free(cmdline);
 
     /* Hush little compiler, don't you cry... */
-    return 0;
+    return retval;
 }
 
 #endif /* __WIN32__ */
