@@ -396,15 +396,31 @@ WIN_SetWindowParent(_THIS, SDL_Window * window, const void *data)
     DWORD style = GetWindowLong(hwnd, GWL_STYLE);
     HWND parent = (HWND) data;
 
-    if ((style & WS_CHILDWINDOW) && parent == NULL) {
-        style &= ~WS_CHILDWINDOW;
-        SetWindowLong(hwnd, GWL_STYLE, style);
-    } else if (!(style & WS_CHILDWINDOW)) {
+    if (parent != NULL) {
+        if (window->flags & SDL_WINDOW_BORDERLESS) {
+            style &= ~WS_POPUP;
+        }
+
         style |= WS_CHILDWINDOW;
-        SetWindowLong(hwnd, GWL_STYLE, style);
+    } else {
+        if (window->flags & SDL_WINDOW_BORDERLESS) {
+            style |= WS_POPUP;
+        }
+
+        style &= ~WS_CHILDWINDOW;
     }
 
+    if (SetWindowLong(hwnd, GWL_STYLE, style) == 0) {
+        return -1;
+    }
+
+    WIN_SetWindowPositionInternal(_this, window, SWP_NOCOPYBITS | SWP_FRAMECHANGED | SWP_NOZORDER | SWP_NOACTIVATE);
+
     if (SetParent(hwnd, parent) == NULL) {
+        return -1;
+    }
+
+    if (SetFocus(hwnd) == NULL) {
         return -1;
     }
 
